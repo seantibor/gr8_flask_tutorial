@@ -1,14 +1,22 @@
-# A very simple Flask Hello World app for you to get started with...
-
-from flask import render_template #remove Flask,
-from app import app #add this line
-import random
-
-students = ['Alison','George', 'Jonah','Jake','Peter','Tyler','Savannah','Aviah','Taylor','Ellie','Shaun','Aiden']
-
-# remove this line app = Flask(__name__)
+from flask import render_template
+from app import app
 
 @app.route('/')
-def hello_world():
-    student = random.choice(students)
-    return render_template("home.html", student=student)
+@app.route('/index')
+def index():
+    user = {'username': 'Miguel'}
+    posts = [
+        {
+            'author': {'username': 'John'},
+            'body': 'Beautiful day in Portland!'
+        },
+        {
+            'author': {'username': 'Susan'},
+            'body': 'The Avengers movie was so cool!'
+        },
+        {
+            'author': {'username': 'Taylor'},
+            'body': 'The Avengers movie was not cool!'
+        }
+    ]
+    return render_template('index.html', title='Home', user=user, posts=posts)
